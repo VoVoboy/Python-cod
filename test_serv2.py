@@ -11,7 +11,7 @@ class QuoteProtocol(protocol.Protocol):
     def dataReceived(self, data):
         print "Number of active connections: %d" % (
             self.factory.numConnections,)
-        print "> Receoved: ``%s''\n> Sending: ``%s''" % (
+        print "> Received: ``%s''\n>  Sending: ``%s''" % (
             data, self.getQuote())
         self.transport.write(self.getQuote())
         self.updateQuote(data)

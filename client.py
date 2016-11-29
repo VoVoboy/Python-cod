@@ -1,8 +1,12 @@
 from twisted.internet import reactor, protocol
+import dns.resolver
+
+
 
 class EchoClient(protocol.Protocol):
     def connectionMade(self):
         self.transport.write("Hello World!")
+        asnA = dns.resolver.query('A')
 
     def dataReceived(self, data):
         print "Server said:", data
@@ -20,5 +24,5 @@ class EchoFactory(protocol.ClientFactory):
         print "Connection lost."
         reactor.stop()
 
-reactor.connectTCP("localhost", 8000, EchoFactory())
+reactor.connectTCP("localhost", 53, EchoFactory())
 reactor.run()
